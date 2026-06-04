@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Loading Reviews...</title>
+    <title>Loading Reviews... | Crown City Exteriors</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         /* Centers everything perfectly on the screen and adds a clean background */
@@ -58,15 +58,26 @@
         }
     </style>
     <script>
-        var ua = navigator.userAgent || navigator.vendor || window.opera;
-        
-        if (/android/i.test(ua)) {
+        var isAndroid = false;
+
+        // STEP 1: Check for the modern Client Hints API (Chrome/Android standard)
+        if (navigator.userAgentData) {
+            isAndroid = navigator.userAgentData.platform === "Android";
+        } 
+        // STEP 2: Fallback to the classic User-Agent string for iPhones and older browsers
+        else {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            isAndroid = /android/i.test(ua);
+        }
+
+        // THE ROUTING LOGIC
+        if (isAndroid) {
             // ANDROID: Brute-force breakout into the native Chrome browser.
             // Bypasses the dead-tap WebView issue and forces the web environment.
             var intentUrl = "intent://m.facebook.com/crowncityexteriors/reviews/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F;end";
             window.location.replace(intentUrl);
         } else {
-            // iOS: Your brilliant /login/ bypass method.
+            // iOS / OTHERS: Your brilliant /login/ bypass method.
             // Uses the www domain for the login gateway, and m.facebook for the final destination.
             window.location.replace("https://www.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F");
         }
