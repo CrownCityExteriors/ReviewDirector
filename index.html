@@ -10,16 +10,14 @@
         var ua = navigator.userAgent || navigator.vendor || window.opera;
         
         if (/android/i.test(ua)) {
-            // ANDROID: Must execute INSTANTLY to preserve the user tap token, 
-            // which Chrome requires to allow the intent:// command to fire.
+            // ANDROID: Brute-force breakout into the native Chrome browser.
+            // Bypasses the dead-tap WebView issue and forces the web environment.
             var intentUrl = "intent://m.facebook.com/crowncityexteriors/reviews/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F;end";
             window.location.replace(intentUrl);
         } else {
-            // iOS: Must be DELAYED to kill the user tap token. 
-            // Without the token, iOS refuses to launch the Facebook app and forces the web browser.
-            setTimeout(function() {
-                window.location.replace("https://m.facebook.com/crowncityexteriors/reviews/");
-            }, 1500); // 1.5 second delay
+            // iOS: Your brilliant /login/ bypass method.
+            // Uses the www domain for the login gateway, and m.facebook for the final destination.
+            window.location.replace("https://www.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F");
         }
     </script>
 </head>
