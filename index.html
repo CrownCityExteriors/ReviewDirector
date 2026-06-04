@@ -4,7 +4,58 @@
     <title>Loading Reviews...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding-top: 30%; color: #333; }
+        /* Centers everything perfectly on the screen and adds a clean background */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            color: #333; 
+            background-color: #f9f9f9; 
+        }
+        .container { 
+            padding: 20px; 
+        }
+        /* Styles the image with rounded corners and a soft shadow */
+        .brand-image {
+            max-width: 250px; 
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h2 { 
+            font-weight: 600; 
+            margin: 0 0 10px 0;
+            color: #222;
+        }
+        p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        /* Animation CSS for the fading dots */
+        .dots {
+            display: inline-block;
+        }
+        .dots span {
+            animation: fadeDots 1.4s infinite both;
+            opacity: 0;
+            font-weight: bold;
+        }
+        /* Staggers the timing so they appear left-to-right */
+        .dots span:nth-child(1) { animation-delay: 0.0s; }
+        .dots span:nth-child(2) { animation-delay: 0.2s; }
+        .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes fadeDots {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
     </style>
     <script>
         var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -22,7 +73,12 @@
     </script>
 </head>
 <body>
-    <h2>Loading Reviews...</h2>
-    <p>Please wait a moment.</p>
+    <div class="container">
+        <!-- Pulls the image directly from your /start/ folder so you don't have to upload it twice -->
+        <img src="https://crowncityexteriors.github.io/ReviewDirector/start/preview.jpg" alt="Crown City Exteriors" class="brand-image">
+        
+        <h2>Loading Reviews</h2>
+        <p>Please wait a moment<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+    </div>
 </body>
 </html>
