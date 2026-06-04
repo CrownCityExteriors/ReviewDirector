@@ -73,8 +73,9 @@
         // THE ROUTING LOGIC
         if (isAndroid) {
             // ANDROID: Brute-force breakout into the native Chrome browser.
-            // Bypasses the dead-tap WebView issue and forces the web environment.
-            var intentUrl = "intent://m.facebook.com/crowncityexteriors/reviews/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F;end";
+            // We now point the intent to the /login/ bypass so modern Androids (S23, Pixel) 
+            // do not aggressively hijack the link into the broken native Facebook app.
+            var intentUrl = "intent://www.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fwww.facebook.com%2Flogin%2F%3Fnext%3Dhttps%253A%252F%252Fm.facebook.com%252Fcrowncityexteriors%252Freviews%252F;end";
             window.location.replace(intentUrl);
         } else {
             // iOS / OTHERS: Your brilliant /login/ bypass method.
