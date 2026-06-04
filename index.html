@@ -3,8 +3,18 @@
 <head>
     <title>Loading Reviews...</title>
     <script>
-        // Executes instantly, stripping the physical tap data
-        window.location.replace("https://m.facebook.com/crowncityexteriors/reviews/");
+        // Check what operating system the phone is using
+        var ua = navigator.userAgent || navigator.vendor || window.opera;
+        
+        if (/android/i.test(ua)) {
+            // ANDROID FIX: Force the link out of the in-app browser and into the native Chrome app.
+            // If Chrome isn't installed, it falls back to the standard web URL safely.
+            var intentUrl = "intent://m.facebook.com/crowncityexteriors/reviews/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F;end";
+            window.location.replace(intentUrl);
+        } else {
+            // iOS FIX: Keep the user in the browser using a standard JS redirect to bypass Universal Links.
+            window.location.replace("https://m.facebook.com/crowncityexteriors/reviews/");
+        }
     </script>
 </head>
 <body>
