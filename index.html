@@ -4,7 +4,6 @@
     <title>Loading Reviews... | Crown City Exteriors</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Centers everything perfectly on the screen and adds a clean background */
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             text-align: center; 
@@ -20,7 +19,6 @@
         .container { 
             padding: 20px; 
         }
-        /* Styles the image with rounded corners and a soft shadow */
         .brand-image {
             max-width: 250px; 
             height: auto;
@@ -38,16 +36,12 @@
             color: #666;
             font-size: 0.9rem;
         }
-        /* Animation CSS for the fading dots */
-        .dots {
-            display: inline-block;
-        }
+        .dots { display: inline-block; }
         .dots span {
             animation: fadeDots 1.4s infinite both;
             opacity: 0;
             font-weight: bold;
         }
-        /* Staggers the timing so they appear left-to-right */
         .dots span:nth-child(1) { animation-delay: 0.0s; }
         .dots span:nth-child(2) { animation-delay: 0.2s; }
         .dots span:nth-child(3) { animation-delay: 0.4s; }
@@ -60,35 +54,29 @@
     <script>
         var isAndroid = false;
 
-        // STEP 1: Check for the modern Client Hints API (Chrome/Android standard)
         if (navigator.userAgentData) {
             isAndroid = navigator.userAgentData.platform === "Android";
-        } 
-        // STEP 2: Fallback to the classic User-Agent string for iPhones and older browsers
-        else {
+        } else {
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             isAndroid = /android/i.test(ua);
         }
 
-        // THE ROUTING LOGIC
         if (isAndroid) {
-            // ANDROID: Brute-force breakout into the native Chrome browser.
-            // We now point the intent to the /login/ bypass so modern Androids (S23, Pixel) 
-            // do not aggressively hijack the link into the broken native Facebook app.
-            var intentUrl = "intent://www.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fwww.facebook.com%2Flogin%2F%3Fnext%3Dhttps%253A%252F%252Fm.facebook.com%252Fcrowncityexteriors%252Freviews%252F;end";
-            window.location.replace(intentUrl);
+            // ANDROID: We removed the brute-force intent link. 
+            // Now, we just feed it the clean profile URL. When newer Androids 
+            // hijack this into the native Facebook app, it will safely land on 
+            // your business page instead of the home feed.
+            window.location.replace("https://www.facebook.com/crowncityexteriors");
         } else {
-            // iOS / OTHERS: Your brilliant /login/ bypass method.
-            // Uses the www domain for the login gateway, and m.facebook for the final destination.
+            // iOS / OTHERS: We keep your brilliant /login/ bypass method.
+            // This preserves the flawless direct-to-review-tab experience for iPhones.
             window.location.replace("https://www.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Fcrowncityexteriors%2Freviews%2F");
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <!-- Pulls the image directly from your /start/ folder so you don't have to upload it twice -->
         <img src="https://crowncityexteriors.github.io/ReviewDirector/start/preview.jpg" alt="Crown City Exteriors" class="brand-image">
-        
         <h2>Loading Reviews</h2>
         <p>Please wait a moment<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
     </div>
